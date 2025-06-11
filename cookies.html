@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeafSpark Garden Pruning - Cookies Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #d6f0d6 0%, #f0faf0 100%);
+    color: #374151;
+    line-height: 1.6;
+    font-size: 18px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: 160px; /* space for cookie banner */
+  }
+  a {
+    color: #16a34a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #145214;
+    outline: none;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    display: block;
+  }
+  .container {
+    width: min(90%, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  header {
+    background: rgba(22, 163, 74, 0.95);
+    backdrop-filter: saturate(180%) blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.4);
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #f0faf0;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  nav.navbar {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  nav.navbar a {
+    color: #e6f4e6;
+    font-weight: 600;
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  nav.navbar a:hover,
+  nav.navbar a:focus {
+    color: #b4f8b4;
+  }
+  .mobile-menu-button {
+    background: none;
+    border: none;
+    color: #f0faf0;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    display: none;
+  }
+  @media (max-width: 767px) {
+    nav.navbar {
+      display: none;
+      flex-direction: column;
+      background: #115e27;
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 250px;
+      height: calc(100% - 60px);
+      padding: 1rem;
+      box-shadow: -4px 0 16px rgba(0,0,0,0.3);
+      z-index: 1100;
+      overflow-y: auto;
+    }
+    nav.navbar.active {
+      display: flex;
+    }
+    nav.navbar a {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #1d7731;
+      font-size: 1.2rem;
+      color: #d6f5d6;
+    }
+    nav.navbar a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu-button {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    nav.navbar {
+      display: flex !important;
+    }
+  }
+  .hero {
+    position: relative;
+    padding: 6rem 1rem 4rem;
+    text-align: center;
+    background: linear-gradient(120deg, #a7d7a7 0%, #e9f5e9 100%);
+    border-radius: 1rem;
+    margin: 2rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #145214;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 0 1px 2px rgba(20,82,20,0.5);
+  }
+  .hero p {
+    font-weight: 500;
+    max-width: 600px;
+    margin: 1rem auto 2rem;
+    font-size: 1.25rem;
+    color: #2f4f2f;
+  }
+  section.content {
+    max-width: 900px;
+    margin: 0 auto 5rem;
+  }
+  section.content h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #145214;
+  }
+  section.content h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #237535;
+  }
+  section.content p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    color: #4b5563;
+  }
+  section.content ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  section.content ul li {
+    margin-bottom: 0.7rem;
+  }
+  footer {
+    background: #145214;
+    color: #cde3c9;
+    padding: 2rem 1rem;
+  }
+  .footer-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .footer-address {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  .footer-address .material-icons {
+    font-size: 2rem;
+    color: #a2cfa2;
+    user-select: none;
+  }
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #145214;
+    color: #cde3c9;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1200;
+    font-size: 1rem;
+  }
+  .cookie-banner p {
+    flex: 1 1 60%;
+    margin: 0;
+  }
+  .cookie-buttons {
+    flex: 1 1 35%;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+  .cookie-buttons button {
+    background-color: #16a34a;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .cookie-buttons button.decline {
+    background-color: #9ca3af;
+  }
+  .cookie-buttons button:hover,
+  .cookie-buttons button:focus {
+    background-color: #145214;
+    outline: none;
+  }
+  @media (max-width:767px) {
+    .cookie-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cookie-buttons {
+      justify-content: flex-start;
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <header role="banner">
+    <div class="container header-inner">
+      <div class="logo" aria-label="LeafSpark Garden Pruning Logo">LeafSpark Garden Pruning</div>
+      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+       <a href="index.html" tabindex="0">Home</a>
+        <a href="privacy.html" tabindex="0">Privacy</a>
+        <a href="terms.html" tabindex="0">Terms & conditons</a>
+        <a href="cookies.html"tabindex="0"aria-current="page">Cookies</a>
+        <a href="contact.html" tabindex="0">Contact us</a>
+      </nav>
+      <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+  </header>
+  <main class="container" role="main">
+    <section class="hero" aria-label="Cookies Policy Title Section">
+      <h1>Cookies Policy</h1>
+      <p>Your privacy and experience matter. Read our comprehensive cookies policy below.</p>
+    </section>
+    <section class="content" aria-label="Cookies Policy Content">
+      <h2>Introduction</h2>
+      <p>This detailed Cookies Policy explains the types of cookies used by LeafSpark Garden Pruning ("we", "us", "our") on our website, how they impact your experience, and your rights and choices about them. This policy spans extensive aspects of cookies from technical definitions to compliance with global privacy laws.</p>
+      <h2>What Are Cookies?</h2>
+      <p>Cookies are small data files set by websites on your browser or device when you visit. These files store information such as login tokens, user preferences, and analytical data to facilitate a seamless and personalized browsing experience.</p>
+      <h2>Types of Cookies We Use</h2>
+      <h3>Essential (Strictly Necessary) Cookies</h3>
+      <p>These cookies are vital for core website functions like security, privacy preferences, or session management. They ensure our site operates correctly and without them, certain services cannot function.</p>
+      <h3>Performance and Analytical Cookies</h3>
+      <p>These collect aggregated, anonymous data about visitor behavior like page visits, duration, and interaction patterns. We use this to analyze traffic trends and improve our website's performance.</p>
+      <h3>Functional Cookies</h3>
+      <p>Functional cookies enable enhanced features such as remembering your language preference or login status, pushing a more interactive and customized user experience.</p>
+      <h3>Targeting and Advertising Cookies</h3>
+      <p>Used to deliver relevant advertisements and offers tailored to your interests. These cookies track browsing habits and help measure campaign effectiveness.</p>
+      <h3>Social Media Cookies</h3>
+      <p>Cookies from social media platforms facilitate content sharing and engagement with our social channels but are governed by their policies.</p>
+
+      <h2>How We Use Cookies</h2>
+      <ul>
+        <li>To maintain secure login and shopping sessions</li>
+        <li>To analyze website traffic and user behavior</li>
+        <li>To personalize content and offers</li>
+        <li>To provide social media functionalities</li>
+        <li>To measure effectiveness of advertising campaigns</li>
+      </ul>
+
+      <h2>Third-Party Cookies</h2>
+      <p>We partner with several third-party providers for analytics and advertising that may place cookies on your browser. These providers operate independently and their use of cookies is subject to their own privacy policies.</p>
+
+      <h2>Managing Your Cookie Preferences</h2>
+      <p>We provide you with full control over your cookie preferences. On your first visit, a cookie consent banner appears enabling you to accept or decline non-essential cookies. You can modify or withdraw your consent at any time through your browser settings or by revisiting the banner.</p>
+
+      <h3>How to Manage Cookies via Browser</h3>
+      <ul>
+        <li>Google Chrome: Settings &gt; Privacy and security &gt; Cookies and other site data</li>
+        <li>Mozilla Firefox: Preferences &gt; Privacy &amp; Security &gt; Cookies and Site Data</li>
+        <li>Microsoft Edge: Settings &gt; Cookies and site permissions &gt; Manage and delete cookies and site data</li>
+        <li>Safari: Preferences &gt; Privacy &gt; Manage Website Data</li>
+      </ul>
+
+      <h3>Clearing Cookies</h3>
+      <p>You can clear cookies at any time from your browser. Note that doing this may log you out of websites and reset preferences.</p>
+
+      <h2>Cookie Duration</h2>
+      <p>Cookies may be session-based (deleted when browser closes) or persistent (stored for longer periods). The lifespan varies depending on the cookie purpose.</p>
+
+      <h2>Legal Compliance</h2>
+      <p>Our cookie practices comply with regulations such as GDPR, CCPA, and ePrivacy Directive to protect your rights and give you transparency.</p>
+
+      <h2>Impact of Declining Cookies</h2>
+      <p>Declining non-essential cookies may limit access to some features, reduce personalization, or impact site functionality and services.</p>
+
+      <h2>Use of Do Not Track (DNT) Signals</h2>
+      <p>Currently, we do not respond directly to browser Do Not Track signals but we honor your cookie consent preferences through our banner.</p>
+
+      <h2>Security and Protection of Cookie Data</h2>
+      <p>Data collected through cookies is processed securely using encryption, access controls, and other safeguards to prevent unauthorized use.</p>
+
+      <h2>Extensive Topics on Cookies and Online Privacy</h2>
+      <h3>Technologies Beyond Cookies</h3>
+      <p>We may use other tracking technologies like web beacons and pixels to enhance analytics and marketing capabilities.</p>
+
+      <h3>Importance of Cookies in Ecommerce</h3>
+      <p>Cookies enable shopping carts, wishlists, and secure payment sessions, critical for effective ecommerce experiences.</p>
+
+      <h3>Privacy-Friendly Browsing Tips</h3>
+      <ul>
+        <li>Use private/incognito mode for sensitive browsing</li>
+        <li>Regularly update your browser and clear cookies</li>
+        <li>Install trusted extensions to control tracking</li>
+      </ul>
+
+      <h3>Managing Cookies on Mobile Devices</h3>
+      <p>Mobile browsers support cookie management similar to desktop; adjust your preferences via browser settings and app permissions.</p>
+
+      <h3>Children’s Online Privacy</h3>
+      <p>We do not knowingly collect information from children under 13 and encourage parents to supervise online activity.</p>
+
+      <h3>Cookies and User Rights</h3>
+      <p>Under applicable laws, you may access, rectify, delete, or restrict personal data collected via cookies by contacting us.</p>
+
+      <h3>Cookie Policy Changes</h3>
+      <p>We review and update this Cookie Policy regularly. We encourage you to check back to stay informed of any changes.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions on cookies or your privacy rights, please contact us:</p>
+      <p><strong>Address:</strong> 181 Mercer Street, New York, NY 10012, United States</p>
+      <p><strong>Phone:</strong> +1 (844) 777 9988</p>
+      <p><strong>Email:</strong> info@leafspark.com</p>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo" id="contact">
+    <div class="footer-container">
+      <address class="footer-address">
+        <span class="material-icons" aria-hidden="true">location_on</span>
+        181 Mercer Street, New York, NY 10012, United States
+      </address>
+      <nav aria-label="Footer contact">
+        <a href="tel:+18447779988" aria-label="Call LeafSpark Garden Pruning">Phone: +1 (844) 777 9988</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies consent" aria-modal="true">
+    <p>LeafSpark uses cookies to personalize content and analyze site usage. You may accept or decline non-essential cookies.</p>
+    <div class="cookie-buttons">
+      <button id="acceptCookies" type="button">Accept</button>
+      <button id="declineCookies" type="button" class="decline">Decline</button>
+    </div>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector('.mobile-menu-button');
+    const nav = document.querySelector('nav.navbar');
+
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+      menuButton.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('active');
+    });
+
+    const cookieBanner = document.querySelector('.cookie-banner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    const declineBtn = document.getElementById('declineCookies');
+
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + days*24*60*60*1000);
+      document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/';
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function checkConsent() {
+      const consent = getCookie('leafspark_cookie_consent');
+      if(consent === 'accepted' || consent === 'declined') {
+        cookieBanner.style.display = 'none';
+      }
+    }
+
+    acceptBtn.addEventListener('click', () => {
+      setCookie('leafspark_cookie_consent', 'accepted', 365);
+      cookieBanner.style.display = 'none';
+      // Insert logic to enable non-essential cookies if applicable
+    });
+
+    declineBtn.addEventListener('click', () => {
+      setCookie('leafspark_cookie_consent', 'declined', 365);
+      cookieBanner.style.display = 'none';
+      // Insert logic to disable non-essential cookies if applicable
+    });
+
+    document.addEventListener('DOMContentLoaded', checkConsent);
+  </script>
+</body>
+</html>

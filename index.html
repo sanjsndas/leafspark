@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeafSpark Garden Pruning Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #d6f0d6 0%, #f0faf0 100%);
+    color: #374151;
+    line-height: 1.65;
+    font-size: 18px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: #16a34a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #15803d;
+    outline: none;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 0.05);
+    display: block;
+  }
+  .container {
+    width: min(90%, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  header {
+    background: rgba(22, 163, 74, 0.95);
+    backdrop-filter: saturate(180%) blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgb(22 163 74 / 0.4);
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #f0faf0;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+  nav a {
+    color: #e6f4e6;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: #b4f8b4;
+  }
+  .mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: #f0faf0;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #115e27;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 250px;
+    height: calc(100% - 60px);
+    padding: 1rem;
+    box-shadow: -4px 0 16px rgb(0 0 0 / 0.3);
+    z-index: 1100;
+    overflow-y: auto;
+  }
+  .mobile-nav.active {
+    display: flex;
+  }
+  .mobile-nav a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1d7731;
+    color: #d6f5d6;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .mobile-nav a:last-child {
+    border-bottom: none;
+  }
+  .hero {
+    position: relative;
+    padding: 6rem 1rem 4rem;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(120deg, #a7d7a7 0%, #e9f5e9 100%);
+    border-radius: 1rem;
+    margin: 2rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #145214;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgb(20 82 20 / 0.5);
+  }
+  .hero p {
+    font-weight: 500;
+    max-width: 600px;
+    margin: 1rem auto 2rem;
+    font-size: 1.25rem;
+    color: #2f4f2f;
+  }
+  .hero button {
+    font-weight: 700;
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgb(22 163 74 / 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .hero button:hover,
+  .hero button:focus {
+    background-color: #145214;
+    outline: none;
+    transform: scale(1.05);
+  }
+  .floating-leaf {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0171eaec-e524-4fb7-81ad-182c6a6baaed.png') no-repeat center/contain;
+    animation: floatLeaf 8s ease-in-out infinite;
+    opacity: 0.7;
+  }
+  .floating-leaf.leaf1 {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+  .floating-leaf.leaf2 {
+    top: 30%;
+    right: 10%;
+    animation-delay: 3s;
+    width: 60px;
+    height: 60px;
+  }
+  .floating-leaf.leaf3 {
+    bottom: 20%;
+    left: 40%;
+    animation-delay: 1.5s;
+  }
+  .floating-leaf.leaf4 {
+    bottom: 10%;
+    right: 30%;
+    animation-delay: 4s;
+    width: 50px;
+    height: 50px;
+  }
+  @keyframes floatLeaf {
+    0%, 100% {transform: translateY(0) rotate(0deg);}
+    50% {transform: translateY(-20px) rotate(15deg);}
+  }
+  section.services {
+    padding-bottom: 3rem;
+  }
+  .services-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .services-header h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #165c15;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+  }
+  .service-card {
+    background: #f0faf0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 16px rgb(22 163 74 / 0.12);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .service-card:hover,
+  .service-card:focus-within {
+    box-shadow: 0 10px 30px rgb(22 163 74 / 0.2);
+  }
+  .service-card img {
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    max-height: 180px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgb(22 163 74 / 0.1);
+  }
+  .service-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #145214;
+    margin-bottom: 0.5rem;
+  }
+  .service-desc {
+    flex-grow: 1;
+    color: #4b5563;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .service-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #16a34a;
+    user-select: none;
+  }
+  section.gallery {
+    padding: 3rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .gallery-header h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #145214;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgb(22 163 74 / 0.1);
+    background: #f7fdf7;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-item:hover,
+  .gallery-item:focus-within {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgb(22 163 74 / 0.3);
+    outline: none;
+    z-index: 10;
+    position: relative;
+  }
+  .gallery-item img {
+    border-radius: 1rem 1rem 0 0;
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .gallery-caption {
+    padding: 0.75rem 1rem 1rem;
+    font-weight: 600;
+    color: #145214;
+    font-size: 1rem;
+    text-align: center;
+  }
+  section.content {
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    color: #4b5563;
+  }
+  section.content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #145214;
+  }
+  section.content p {
+    margin-bottom: 1.25rem;
+    text-align: justify;
+  }
+  section.content h4 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: #2a5e1a;
+  }
+  section.faq, section.testimonials, section.eco-friendly, section.seasonal-checklist {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 1rem;
+    background: #f7fef7;
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgb(22 163 74 / 0.1);
+  }
+  section.faq h3, section.testimonials h3, section.eco-friendly h3, section.seasonal-checklist h3 {
+    font-size: 1.8rem;
+    color: #145214;
+    margin-bottom: 1rem;
+  }
+  section.faq details, section.testimonials blockquote, section.eco-friendly p, section.seasonal-checklist ul {
+    margin-bottom: 1rem;
+  }
+  blockquote {
+    color: #2f4f2f;
+    font-style: italic;
+    border-left: 4px solid #16a34a;
+    padding-left: 1rem;
+    background: #e4f4e1;
+    border-radius: 0.5rem;
+  }
+  ul {
+    list-style-position: inside;
+    padding-left: 0;
+    color: #4b5563;
+  }
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    color: #237535;
+  }
+  details[open] summary {
+    color: #145214;
+  }
+
+  section.blog, section.subscribe, section.pruning-theory {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 1rem;
+    background: #f7fef7;
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgb(22 163 74 / 0.1);
+  }
+  section.blog h3, section.subscribe h3, section.pruning-theory h3 {
+    font-size: 1.8rem;
+    color: #145214;
+    margin-bottom: 1rem;
+  }
+  article.blog-post {
+    margin-bottom: 1.7rem;
+  }
+  article.blog-post h4 {
+    margin-bottom: 0.5rem;
+    color: #2a5e1a;
+  }
+  article.blog-post p {
+    margin: 0;
+    color: #4b5563;
+  }
+  form.subscribe-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+  }
+  form.subscribe-form label {
+    flex-basis: 100%;
+    font-weight: 600;
+    color: #237535;
+  }
+  form.subscribe-form input[type="email"] {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #16a34a;
+    flex-grow: 1;
+    min-width: 220px;
+  }
+  form.subscribe-form button {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form.subscribe-form button:hover,
+  form.subscribe-form button:focus {
+    background-color: #145214;
+    outline: none;
+  }
+  section.disclaimer {
+    background: #d1e7d1;
+    border-radius: 1rem;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem 2rem;
+    font-size: 0.9rem;
+    color: #145214;
+    border: 1px solid #a3c293;
+  }
+  section.disclaimer h4 {
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+  section.customer-satisfaction {
+    max-width: 900px;
+    margin: 4rem auto 6rem;
+    background: #ecf8ec;
+    padding: 2rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgb(22 163 74 / 0.12);
+    text-align: center;
+  }
+  section.customer-satisfaction h3 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: #145214;
+    margin-bottom: 1rem;
+  }
+  section.customer-satisfaction p {
+    font-size: 1.1rem;
+    color: #3d6a3d;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  footer {
+    background: #145214;
+    color: #cde3c9;
+    padding: 2rem 1rem;
+  }
+  .footer-container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .footer-address {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  .footer-address .material-icons {
+    font-size: 2rem;
+    color: #a2cfa2;
+    user-select: none;
+  }
+  :focus-visible {
+    outline: 3px solid #16a34a;
+    outline-offset: 3px;
+  }
+  @media (max-width: 767px) {
+    nav {
+      display: none;
+    }
+    .mobile-menu-button {
+      display: block;
+    }
+    .hero h1 {
+      font-size: 2rem;
+    }
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<header role="banner">
+  <div class="container header-inner">
+    <div class="logo" aria-label="LeafSpark Garden Pruning Logo">LeafSpark Garden Pruning</div>
+    <nav role="navigation" aria-label="Primary navigation">
+    <a href="index.html" tabindex="0"aria-current="page">Home</a>
+        <a href="privacy.html" tabindex="0">Privacy</a>
+        <a href="terms.html" tabindex="0">Terms & conditons</a>
+        <a href="cookies.html"tabindex="0">Cookies</a>
+        <a href="contact.html" tabindex="0">Contact us</a>
+    </nav>
+    <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation menu" hidden>
+ <a href="index.html" tabindex="0"aria-current="page">Home</a>
+        <a href="privacy.html" tabindex="0">Privacy</a>
+        <a href="terms.html" tabindex="0">Terms & conditons</a>
+        <a href="cookies.html"tabindex="0">Cookies</a>
+        <a href="contact.html" tabindex="0">Contact us</a>
+  </nav>
+</header>
+
+<main role="main" class="container" id="home">
+  <section class="hero" aria-label="Introduction and main call to action">
+    <h1>Expert Garden Pruning Services with LeafSpark</h1>
+    <p>Enhance the beauty, health, and vitality of your trees and plants with our professional pruning services. Trusted by thousands, LeafSpark brings your garden to life.</p>
+    <button type="button" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'});">Explore Our Services</button>
+    <div class="floating-leaf leaf1" aria-hidden="true"></div>
+    <div class="floating-leaf leaf2" aria-hidden="true"></div>
+    <div class="floating-leaf leaf3" aria-hidden="true"></div>
+    <div class="floating-leaf leaf4" aria-hidden="true"></div>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="services-heading">
+    <div class="services-header">
+      <h2 id="services-heading">Our Pruning Services & Prices</h2>
+      <p>Carefully tailored to give your garden the spark it deserves.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card" tabindex="0" aria-label="Tree Pruning">
+        <img src="s1.jpg" alt="Gardener pruning a large tree outdoors with sun rays" />
+        <h3 class="service-title">Tree Pruning</h3>
+        <p class="service-desc">Professional tree pruning to maintain tree health, enhance growth, improve safety, and enhance aesthetics.</p>
+        <div class="service-price" aria-label="Price starting from 120 dollars">$120 - $500 depending on size</div>
+      </article>
+      <article class="service-card" tabindex="0" aria-label="Hedge Trimming">
+        <img src="s2.jpg" alt="Gardener trimming neatly shaped green hedge with electric trimmer" />
+        <h3 class="service-title">Hedge Trimming</h3>
+        <p class="service-desc">Shaping and trimming hedges for a clean, manicured look that enhances your garden's design.</p>
+        <div class="service-price" aria-label="Price starting from 80 dollars">$80 - $300 per hedge</div>
+      </article>
+      <article class="service-card" tabindex="0" aria-label="Shrub Pruning">
+        <img src="s3.jpg" alt="Close view of gardener cutting green shrub with pruning shears" />
+        <h3 class="service-title">Shrub Pruning</h3>
+        <p class="service-desc">Maintain size and health of your shrubs with careful pruning and shaping.</p>
+        <div class="service-price" aria-label="Price starting from 50 dollars">$50 - $200 depending on shrub size</div>
+      </article>
+      <article class="service-card" tabindex="0" aria-label="Fruit Tree Pruning">
+        <img src="s4.jpg" alt="Healthy fruit tree being pruned by professional gardener" />
+        <h3 class="service-title">Fruit Tree Pruning</h3>
+        <p class="service-desc">Specialized pruning designed to maximize fruit production and tree health.</p>
+        <div class="service-price" aria-label="Price starting from 150 dollars">$150 - $600 per tree</div>
+      </article>
+      <article class="service-card" tabindex="0" aria-label="Ornamental Plant Pruning">
+        <img src="s5.jpg" alt="Bright garden with colorful ornamental plants pruned neatly" />
+        <h3 class="service-title">Ornamental Plant Pruning</h3>
+        <p class="service-desc">Enhance the charm of your ornamental plants through artistic pruning and care.</p>
+        <div class="service-price" aria-label="Price starting from 70 dollars">$70 - $250 per session</div>
+      </article>
+      <article class="service-card" tabindex="0" aria-label="Emergency Storm Damage Pruning">
+        <img src="s6.jpg" alt="Storm damaged tree being professionally pruned to clear hazards" />
+        <h3 class="service-title">Emergency Storm Damage Pruning</h3>
+        <p class="service-desc">Rapid response pruning service to safely manage storm and damage affected trees.</p>
+        <div class="service-price" aria-label="Price starting from 180 dollars">$180 - $700 depending on damage</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery" aria-labelledby="gallery-heading">
+    <div class="gallery-header">
+      <h2 id="gallery-heading">Gallery of Our Work</h2>
+      <p>A visual showcase of the health and beauty we've brought to gardens and landscapes.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-item" tabindex="0">
+        <img src="g1.jpg" alt="Majestic oak tree freshly pruned with healthy branches and clear blue sky" />
+        <figcaption class="gallery-caption">Majestic Oak Tree Pruned</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g2.jpg" alt="Side by side image showing hedges before and after professional trimming with clean lines" />
+        <figcaption class="gallery-caption">Hedge Trimmed to Perfection</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g3.jpg" alt="Professional gardener trimming branches of a mature apple tree in garden orchard" />
+        <figcaption class="gallery-caption">Apple Tree Orchard Pruning</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g4.jpg" alt="Decorative green shrubs carefully pruned into artistic shapes for garden privacy" />
+        <figcaption class="gallery-caption">Artistic Shrub Shaping</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g5.jpg" alt="Blooming fruit tree after spring pruning with colorful blossoms and bright sunshine" />
+        <figcaption class="gallery-caption">Fruit Tree in Bloom</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g6.jpg" alt="LeafSpark professional pruning team working on a large tree with safety gear" />
+        <figcaption class="gallery-caption">Our Team At Work</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g7.jpg" alt="A beautiful garden walkway bordered by freshly pruned plants and seasonal flowers" />
+        <figcaption class="gallery-caption">Garden Walkway with Freshly Pruned Plants</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g8.jpg" alt="Sunlight filtering through the canopy of well-pruned garden trees in autumn" />
+        <figcaption class="gallery-caption">Sunlight Through Pruned Tree Canopy</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g9.jpg" alt="Professional pruning to remove deadwood and hazard branches from urban tree" />
+        <figcaption class="gallery-caption">Safety-First Tree Pruning</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="g10.jpg" alt="Spring garden full of healthy pruned plants and new growth appearing" />
+        <figcaption class="gallery-caption">Spring Garden Maintenance</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="content" aria-label="Detailed Service and Gardening Content">
+    <h3>Welcome to LeafSpark Garden Pruning Services</h3>
+    <p>At LeafSpark, we are passionate about transforming gardens through expert pruning, nurturing the health of your trees and plants to bring vitality and beauty to your outdoor spaces. Our team of certified arborists and horticulturists brings years of experience and an eye for detail, ensuring that every cut promotes growth, safety, and aesthetic excellence.</p>
+    <p>Pruning is an essential horticultural practice that impacts the longevity, health, and appearance of your garden. Whether you have ornamental plants that need sculpting, fruit trees that require skillful shaping for optimum fruit yield, or safety hazards that demand immediate attention, LeafSpark is your trusted partner. We use environmentally responsible practices and state-of-the-art tools to make your garden thrive.</p>
+    <h3>Why Choose LeafSpark for Your Garden?</h3>
+    <p>Our approach combines scientific knowledge with artistic skill. We prioritize customer satisfaction, ensuring that every pruning project is customized to meet your specific garden conditions and goals. From smart thinning to corrective pruning, our solutions improve light penetration, air circulation, and structural integrity of your vegetation.</p>
+    <p>Our professionals also emphasize sustainable practices to encourage natural resilience and reduce risk factors such as diseases and pest infestation. Regular pruning results in healthier plants, safer properties, and an overall inviting garden environment perfect for relaxation and recreation.</p>
+
+    <h3>Pruning Tips for Healthy Gardens</h3>
+    <p>Proper pruning techniques are key to maintaining a garden's health and vibrancy. Remove dead, diseased, or damaged branches promptly to prevent spread and stimulate new growth. Timing is important: prune flowering plants immediately after bloom, but prune most trees and shrubs in late winter or early spring to promote growth cycles.</p>
+    <p>Sharp tools and clean cuts reduce risk of damage and infection. Always prune to the branch collar, avoid leaving stubs, and maintain the natural shape of plants to retain their beauty. If unsure, professional advice and services can safeguard your plants' health for years to come.</p>
+
+    <h3>Seasonal Pruning Advice</h3>
+    <p>Spring pruning encourages new growth and flowering, while summer pruning controls size and improves air flow. Fall pruning focuses on removing deadwood and preparing plants for winter dormancy. Winter pruning is ideal for many deciduous trees when leafless branches make it easier to see structure and hazards.</p>
+    <p>Our team designs pruning schedules tailored for your garden's unique needs, ensuring it thrives through every season with optimal health and aesthetics.</p>
+
+    <h3>The Benefits of Professional Garden Pruning</h3>
+    <p>Professional pruning improves garden health by stimulating growth and reducing diseases. It enhances safety by removing hazardous branches and improving visibility. It increases property value by maintaining a manicured aesthetic appeal. Plus, professional gardeners bring expertise, experience, and safety precautions, saving you time and effort.</p>
+    <p>LeafSpark promises superior workmanship, ecological responsibility, and dedicated customer support so your garden remains a beautiful, healthy haven for you and your family.</p>
+
+    <p>LeafSpark is dedicated to transparency, professionalism, and exceptional customer service. We provide detailed consultations, clear pricing, and timely project completions. Our teams always respect your property and ensure clean-up and debris removal after every visit. Experience the difference of a LeafSpark garden today.</p>
+  </section>
+
+  <section class="blog" id="blog" aria-label="Latest Articles and Blog">
+    <h3>Latest Articles & Blog</h3>
+    <article class="blog-post" tabindex="0">
+      <h4>Top 5 Pruning Mistakes to Avoid</h4>
+      <p>Pruning can make or break your garden's health. Learn what common mistakes to avoid to keep your plants thriving and beautiful year-round.</p>
+      <a href="#" aria-label="Read full article: Top 5 Pruning Mistakes to Avoid">Read more</a>
+    </article>
+    <article class="blog-post" tabindex="0">
+      <h4>Spring Pruning: How to Prepare Your Garden</h4>
+      <p>Spring is the perfect time to prune many plants to encourage vibrant growth. Discover tips and timing advice for effective spring pruning.</p>
+      <a href="#" aria-label="Read full article: Spring Pruning: How to Prepare Your Garden">Read more</a>
+    </article>
+    <article class="blog-post" tabindex="0">
+      <h4>Eco-Friendly Gardening: Sustainable Practices You Can Adopt</h4>
+      <p>Supporting your garden while caring for the earth is easier than you think. Explore sustainable gardening practices that benefit both your plants and the planet.</p>
+      <a href="#" aria-label="Read full article: Eco-Friendly Gardening: Sustainable Practices You Can Adopt">Read more</a>
+    </article>
+  </section>
+
+  <section class="subscribe" aria-label="Subscribe for Gardening Tips">
+    <h3>Subscribe to Our Newsletter</h3>
+    <p>Get regular gardening tips, seasonal reminders, and exclusive LeafSpark updates delivered directly to your inbox.</p>
+    <form class="subscribe-form" aria-label="Newsletter subscription form">
+      <label for="email-input">Email Address:</label>
+      <input id="email-input" type="email" name="email" placeholder="you@example.com" required aria-required="true" />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <section class="pruning-theory" aria-label="Pruning Theory and Plant Biology">
+    <h3>Pruning Theory and Plant Biology</h3>
+    <p>Understanding the science behind pruning helps you appreciate its impact on plant health and design. Pruning influences the plant’s hormonal balance and stimulates the development of new branches and leaves, promoting vigor and longevity.</p>
+    <p><strong>Plant Response to Pruning:</strong> When you prune a branch, the plant reacts by activating dormant buds near the cut, allowing new growth. Proper cuts encourage growth in desired directions and suppress unwanted shoots.</p>
+    <p><strong>The Role of the Branch Collar:</strong> Every branch has a collar – a protective ring of tissue that helps the tree seal wounds caused by pruning and prevents disease entry. Pruning cuts should respect the collar and avoid flush cuts to ensure faster healing.</p>
+    <p><strong>Types of Pruning Cuts:</strong> Thinning cuts remove entire branches back to the main stem to open canopy and improve light penetration. Heading cuts shorten a branch to encourage denser foliage growth. Each type serves a different horticultural purpose.</p>
+    <p><strong>Timing and Seasonal Effects:</strong> Pruning at the correct time is vital. Pruning during dormancy minimizes stress and disease risk. During active growth, pruning can shape and control plant size but requires care to avoid excessive shock.</p>
+    <p><strong>Choosing the Right Tools:</strong> Sharp, clean pruning tools prevent tissue damage and reduce infection risks. Different tools suit different cuts, from bypass pruners for live wood to loppers and saws for thicker branches.</p>
+    <p><strong>Benefits of Strategic Pruning:</strong> Beyond aesthetics, well-planned pruning improves air circulation, reduces pest problems, encourages fruiting and flowering, and increases overall plant resilience.</p>
+    <p>LeafSpark applies advanced pruning theory combined with practical expertise to give your garden the very best care and structure, ensuring long-term beauty and health for your plants.</p>
+  </section>
+
+  <section class="disclaimer" aria-label="Disclaimer">
+    <h4>Disclaimer</h4>
+    <p>The information provided by LeafSpark Garden Pruning Services is for general informational purposes only. While we strive to keep content accurate and up-to-date, the complexity of horticultural conditions means results may vary. LeafSpark disclaims any liability for decisions made based on the information found on this website. Service pricing and availability are subject to change without notice. We recommend consulting directly with our experts to get precise advice tailored for your garden.</p>
+  </section>
+
+  <section class="customer-satisfaction" aria-label="Customer satisfaction statement">
+    <h3>Increasing Our Customers' Satisfaction is Our Top Priority</h3>
+    <p>Thousands of clients trust LeafSpark for expert pruning, dependable service, and beautiful results that enrich their gardens and communities. Join the family of satisfied garden lovers who have experienced superior care, friendly service, and lasting garden health through our professional pruning services.</p>
+  </section>
+</main>
+
+<footer role="contentinfo" id="contact">
+  <div class="footer-container">
+    <address class="footer-address">
+      <span class="material-icons" aria-hidden="true">location_on</span>
+      181 Mercer Street, New York, NY 10012, United States
+    </address>
+    <nav aria-label="Footer social media or contact">
+      <a href="mailto:info@leafspark.com" aria-label="Email LeafSpark Garden Pruning">info@leafspark.com</a> |
+      <a href="tel:+18447779988" aria-label="Call LeafSpark Garden Pruning">+1 (844) 777 9988</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const menuButton = document.querySelector('.mobile-menu-button');
+const mobileNav = document.querySelector('.mobile-nav');
+menuButton.addEventListener('click', () => {
+  const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+  menuButton.setAttribute('aria-expanded', !expanded);
+  if(!expanded){
+    mobileNav.classList.add('active');
+    mobileNav.removeAttribute('hidden');
+    Array.from(mobileNav.querySelectorAll('a')).forEach(a => {
+      a.setAttribute('tabindex', '0');
+    });
+  } else {
+    mobileNav.classList.remove('active');
+    mobileNav.setAttribute('hidden', '');
+    Array.from(mobileNav.querySelectorAll('a')).forEach(a => {
+      a.setAttribute('tabindex', '-1');
+    });
+  }
+});
+</script>
+</body>
+</html>
+

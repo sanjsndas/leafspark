@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeafSpark Garden Pruning - Contact Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #d6f0d6 0%, #f0faf0 100%);
+    color: #374151;
+    line-height: 1.65;
+    font-size: 18px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: #16a34a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #15803d;
+    outline: none;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 0.05);
+    display: block;
+  }
+  .container {
+    width: min(90%, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  header {
+    background: rgba(22, 163, 74, 0.95);
+    backdrop-filter: saturate(180%) blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgb(22 163 74 / 0.4);
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #f0faf0;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  nav.navbar {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  nav.navbar a {
+    color: #e6f4e6;
+    font-weight: 600;
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  nav.navbar a:hover,
+  nav.navbar a:focus {
+    color: #b4f8b4;
+  }
+  .mobile-menu-button {
+    background: none;
+    border: none;
+    color: #f0faf0;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    display: none;
+  }
+  /* Mobile styles */
+  @media (max-width: 767px) {
+    nav.navbar {
+      display: none;
+      flex-direction: column;
+      background: #115e27;
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 250px;
+      height: calc(100% - 60px);
+      padding: 1rem;
+      box-shadow: -4px 0 16px rgb(0 0 0 / 0.3);
+      z-index: 1100;
+      overflow-y: auto;
+    }
+    nav.navbar.active {
+      display: flex;
+    }
+    nav.navbar a {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #1d7731;
+      font-size: 1.2rem;
+      color: #d6f5d6;
+    }
+    nav.navbar a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu-button {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    nav.navbar {
+      display: flex !important;
+    }
+  }
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 6rem 1rem 4rem;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(120deg, #a7d7a7 0%, #e9f5e9 100%);
+    border-radius: 1rem;
+    margin: 2rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #145214;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgb(20 82 20 / 0.5);
+  }
+  .hero p {
+    font-weight: 500;
+    max-width: 600px;
+    margin: 1rem auto 2rem;
+    font-size: 1.25rem;
+    color: #2f4f2f;
+  }
+  .hero button {
+    font-weight: 700;
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgb(22 163 74 / 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .hero button:hover,
+  .hero button:focus {
+    background-color: #145214;
+    outline: none;
+    transform: scale(1.05);
+  }
+  .floating-leaf {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b5a47cd-fc61-4a1c-af24-618e66ccdd6c.png') no-repeat center/contain;
+    animation: floatLeaf 8s ease-in-out infinite;
+    opacity: 0.7;
+  }
+  .floating-leaf.leaf1 {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+  .floating-leaf.leaf2 {
+    top: 30%;
+    right: 10%;
+    animation-delay: 3s;
+    width: 60px;
+    height: 60px;
+  }
+  .floating-leaf.leaf3 {
+    bottom: 20%;
+    left: 40%;
+    animation-delay: 1.5s;
+  }
+  .floating-leaf.leaf4 {
+    bottom: 10%;
+    right: 30%;
+    animation-delay: 4s;
+    width: 50px;
+    height: 50px;
+  }
+  @keyframes floatLeaf {
+    0%, 100% {transform: translateY(0) rotate(0deg);}
+    50% {transform: translateY(-20px) rotate(15deg);}
+  }
+  section.content {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    color: #4b5563;
+  }
+  section.content h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #145214;
+  }
+  section.content h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #237535;
+  }
+  section.content p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+  section.content ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  section.content ul li {
+    margin-bottom: 0.7rem;
+  }
+  form.contact-form {
+    background-color: #f0faf0;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgba(22,163,74,0.1);
+    max-width: 600px;
+    margin: 2rem auto 4rem;
+  }
+  form.contact-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #145214;
+  }
+  form.contact-form input,
+  form.contact-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid #16a34a;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+  form.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  form.contact-form button {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form.contact-form button:hover,
+  form.contact-form button:focus {
+    background-color: #145214;
+    outline: none;
+  }
+  footer {
+    background: #145214;
+    color: #cde3c9;
+    padding: 2rem 1rem;
+  }
+  .footer-container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .footer-address {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  .footer-address .material-icons {
+    font-size: 2rem;
+    color: #a2cfa2;
+    user-select: none;
+  }
+  :focus-visible {
+    outline: 3px solid #16a34a;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    nav.navbar {
+      display: none;
+      flex-direction: column;
+      background: #115e27;
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 250px;
+      height: calc(100% - 60px);
+      padding: 1rem;
+      box-shadow: -4px 0 16px rgb(0 0 0 / 0.3);
+      z-index: 1100;
+      overflow-y: auto;
+    }
+    nav.navbar.active {
+      display: flex;
+    }
+    nav.navbar a {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #1d7731;
+      font-size: 1.2rem;
+      color: #d6f5d6;
+    }
+    nav.navbar a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu-button {
+      display: block;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    nav.navbar {
+      display: flex !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="container header-inner">
+    <div class="logo" aria-label="LeafSpark Garden Pruning Logo">LeafSpark Garden Pruning</div>
+    <nav class="navbar" role="navigation" aria-label="Primary navigation">
+   <a href="index.html" tabindex="0">Home</a>
+        <a href="privacy.html" tabindex="0">Privacy</a>
+        <a href="terms.html" tabindex="0">Terms & conditons</a>
+        <a href="cookies.html"tabindex="0">Cookies</a>
+        <a href="contact.html" tabindex="0 "aria-current="page">Contact us</a>
+    </nav>
+    <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+</header>
+
+<main class="container" role="main" id="contact-us">
+  <section class="hero" aria-label="Contact Us Title Section">
+    <h1>Contact LeafSpark Garden Pruning</h1>
+    <p>We’re here to help. Reach out to us anytime for inquiries, appointments, or support.</p>
+  </section>
+
+  <form class="contact-form" aria-label="Contact Form - LeafSpark Garden Pruning" method="POST" action="#">
+    <label for="name">Full Name *</label>
+    <input id="name" name="name" type="text" required aria-required="true" placeholder="Your full name" />
+    <label for="email">Email Address *</label>
+    <input id="email" name="email" type="email" required aria-required="true" placeholder="you@example.com" />
+    <label for="phone">Phone Number *</label>
+    <input id="phone" name="phone" type="tel" required aria-required="true" placeholder="+1 (123) 456-7890" />
+    <label for="subject">Subject *</label>
+    <input id="subject" name="subject" type="text" required aria-required="true" placeholder="Subject of your message" />
+    <label for="message">Message *</label>
+    <textarea id="message" name="message" required aria-required="true" placeholder="Write your message here..."></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <section class="content" aria-label="Additional Contact Information and Topics">
+    <h2>Additional Contact Information</h2>
+
+    <h3>Our Address</h3>
+    <p>181 Mercer Street, New York, NY 10012, United States</p>
+
+    <h3>Phone Number</h3>
+    <p>+1 (844) 777 9988</p>
+
+    <h3>Email</h3>
+    <p>info@leafspark.com</p>
+
+    <h2>More About Contacting LeafSpark</h2>
+
+    <h3>Customer Service Hours</h3>
+    <p>Our customer service team is available Monday through Friday, from 8:00 AM to 6:00 PM EST. We strive to respond to all inquiries within 24 hours.</p>
+
+    <h3>Emergency Contacts</h3>
+    <p>For urgent pruning requests or storm damage assistance outside normal business hours, please call our emergency hotline at +1 (212) 555-9999.</p>
+
+    <h3>Feedback & Complaints</h3>
+    <p>Your feedback is important to us. Should you experience any issues or have suggestions, please contact our support team at feedback@leafspark.com. All complaints will be handled professionally and swiftly.</p>
+
+    <h3>Appointment Scheduling</h3>
+    <p>Use our website form, call, or email to schedule pruning services. We recommend booking at least two weeks in advance, especially during peak seasons.</p>
+
+    <h3>Service Areas</h3>
+    <p>LeafSpark Garden Pruning offers services throughout New York City metropolitan area and neighboring counties. Please reach out if you are unsure whether we cover your location.</p>
+
+    <h3>Questions About Pruning Services</h3>
+    <p>Our knowledgeable team is ready to answer all questions regarding tree, shrub, hedge, and specialty pruning techniques, pricing, and scheduling.</p>
+
+    <h3>Request a Quote</h3>
+    <p>We provide free, no-obligation quotes for all pruning projects. Simply fill out our contact form or call us to get started.</p>
+
+    <h3>Customer Testimonials</h3>
+    <p>See what our satisfied customers have to say about their experiences with LeafSpark. Testimonials are available on our website or by request.</p>
+
+    <h3>Corporate and Bulk Service Inquiries</h3>
+    <p>For corporate accounts, property managers, or large-scale pruning projects, contact our business development team at corporate@leafspark.com for tailored proposals.</p>
+
+    <h3>Privacy and Data Security</h3>
+    <p>All personal information submitted through our contact channels is handled securely and in accordance with our Privacy Policy (see privacy.html).</p>
+
+    <h3>Social Media Connections</h3>
+    <p>Follow LeafSpark on social media platforms for latest updates, gardening tips, and special offers.</p>
+
+    <h3>FAQs About Contacting Us</h3>
+    <p>We’ve compiled a list of frequently asked questions related to contacting LeafSpark, our response times, and service commitments to help you get the most from our communication.</p>
+
+    <h3>Technical Support</h3>
+    <p>Assistance with website navigation, appointment booking issues, or account management is available through our support team at support@leafspark.com.</p>
+
+    <h3>Community Engagement</h3>
+    <p>LeafSpark participates in local community initiatives and events. For information or to invite us to your event, contact community@leafspark.com.</p>
+
+    <h3>Newsletter Subscription</h3>
+    <p>Sign up for our newsletter to receive seasonal pruning tips, exclusive offers, and all things garden related delivered to your inbox.</p>
+
+    <h3>Corporate Social Responsibility</h3>
+    <p>Learn about our commitments to sustainability, eco-friendly pruning, and charitable engagements by reaching out.</p>
+
+    <h3>Additional Support Resources</h3>
+    <p>Access comprehensive guides and articles related to garden care, available through our blog and support pages.</p>
+
+    <h3>Business Hours and Location Accessibility</h3>
+    <p>Our office is conveniently located with accessible parking and public transit options. Phone support hours are M-F 8:00 AM to 6:00 PM EST.</p>
+
+    <h3>How to Reach Us</h3>
+    <p>We welcome in-person visits by appointment only. Please call ahead to schedule.</p>
+
+    <h3>Emergency Pruning Services</h3>
+    <p>For emergency pruning needs, contact our 24/7 hotline. We prioritize safety and prompt response in urgent situations.</p>
+
+    <h3>Service Guarantees</h3>
+    <p>We stand behind our work with a customer satisfaction guarantee. Contact us for any concerns or follow up services.</p>
+
+    <h3>Directions and Facility Information</h3>
+    <p>Our main facilities are equipped with the latest pruning technology to ensure efficient, safe, and eco-conscious service delivery.</p>
+
+    <h3>Training and Expertise</h3>
+    <p>Our arborists and pruning specialists are certified and undergo continuous training to provide top-tier care.</p>
+
+    <h3>Referral Program</h3>
+    <p>Refer a friend and receive discounts or special offers. Contact us to learn more.</p>
+
+    <h3>Seasonal Specials</h3>
+    <p>Keep an eye on our seasonal promotions for cost savings on selected pruning services.</p>
+
+    <h3>Custom Projects</h3>
+    <p>We cater to custom garden projects – please reach out to discuss your unique needs.</p>
+
+  </section>
+</main>
+
+<footer role="contentinfo" id="contact">
+  <div class="footer-container">
+    <address class="footer-address">
+      <span class="material-icons" aria-hidden="true">location_on</span>
+      181 Mercer Street, New York, NY 10012, United States
+    </address>
+    <nav aria-label="Footer social media or contact">
+      <a href="tel:+18447779988" aria-label="Call LeafSpark Garden Pruning">Phone: +1 (844) 777 9988</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const menuButton = document.querySelector('.mobile-menu-button');
+const nav = document.querySelector('nav.navbar');
+menuButton.addEventListener('click', () => {
+  const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+  menuButton.setAttribute('aria-expanded', !expanded);
+  nav.classList.toggle('active');
+});
+</script>
+</body>
+</html>
